@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/eruda.min.js"></script>
+    <style>
+      * {
+        font-size: 20px;
+      }
+      .container {
+        height: 200px;
+        background: lightblue;
+      }
+      #msg {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <p><%= title %></p>
+    <div class="container">
+      <p id="content1">------------</p>
+      <p id="content2">你好，我是Javascripts</p>
+      <button id="btn">用messageHandler发给Native</button>
+      <button id="btn2">用scheme发给Native</button>
+    </div>
+    <script>eruda.init();</script>
+    <script>
+      function messageHandlerSend() {
+        console.log('messageHandlerSend');
+        window.webkit.messageHandlers.messageFromWeb.postMessage({msg: 'hello，从js过来的问候 - messageHandlers'});
+      }
+
+      function schemeSend() {
+        console.log('schemeSend');
+        const iframe = document.createElement("iframe");
+        iframe.src = 'smt://__message__?msg=js发过来的信息 - scheme';
+        iframe.style.display = 'none';
+        document.documentElement.appendChild(iframe);
+      }
+
+      document.querySelector('#btn').addEventListener('click', messageHandlerSend);
+      document.querySelector('#btn2').addEventListener('click', schemeSend);
+    </script>
+  </body>
+</html>

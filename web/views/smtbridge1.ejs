@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/eruda.min.js"></script>
+    <!-- <script src="/javascripts/smtbridge.js"></script> -->
+    <script src="/javascripts/bridgeutil.js"></script>
+    <style>
+      * {
+        font-size: 20px;
+      }
+      .container {
+        height: 200px;
+        background: lightblue;
+      }
+      #msg {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <p><%= title %></p>
+    <div class="container">
+      <p id="content1">------------</p>
+      <p id="content2">你好，我是Javascripts</p>
+      <button id="btn1">btn1</button>
+      <button id="btn2">btn2</button>
+    </div>
+    <script>eruda.init();</script>
+    <script>
+      detectBridgeLoaded((smtBridge) => {
+        console.log('detectBridgeLoaded');
+        smtBridge.registerHandler('setText', (data, cb) => {
+          document.querySelector('#content1').innerHTML = data;
+        });
+
+        smtBridge.registerHandler('setText2', (data, cb) => {
+          document.querySelector('#content2').innerHTML = data;
+          cb('报告，设置完成。');
+        });
+
+        document.querySelector('#btn1').addEventListener('click', () => {
+          smtBridge.callHandler('showMessage', '爱的魔力转圈圈');
+        });
+
+        document.querySelector('#btn2').addEventListener('click', () => {
+          smtBridge.callHandler('getUserInfo', '给我张三的用户信息', function(data) {
+            setTimeout(() => {
+              console.log(data);
+              alert(data.username);
+            }, 3000);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

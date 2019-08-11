@@ -1,0 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '7.0'
+
+
+target "JSBridge" do
+
+pod 'Masonry'
+pod 'SVProgressHUD'
+pod 'EDColor'
+pod 'WebViewJavascriptBridge', '~> 6.0'
+
+end
+
