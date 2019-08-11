@@ -1,9 +1,18 @@
 # JSBridge_DEMO
-JSBridge DEMO
+JSBridge DEMO 以下2个子目录一起使用
 
-#1 objc 
-安装依赖包 pod install
+## objc 
+安装依赖包
+```bash
+pod install
+```
 
-#1 nodejs
-安装依赖包 npm install
-启动服务 npm start
+## nodejs
+安装依赖包 
+```bash
+npm install
+```
+启动服务
+```bash
+npm start
+```
